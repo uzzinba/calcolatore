@@ -2,30 +2,46 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Calcolatore Nicole – Off Stage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Per permettere lo scroll verticale su mobile quando la card supera l'altezza */
+        html, body {
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
         body {
             background: #0A0A0A;
             color: #F2EDE4;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;  /* su desktop centrato verticalmente con flex-start? meglio center per desktop */
             min-height: 100vh;
             padding: 20px;
             position: relative;
-            overflow: hidden;
             animation: fadeInBg 0.8s ease-out;
         }
+        /* su desktop vogliamo center, ma su mobile flex-start potrebbe lasciare spazio in alto? 
+           Per evitare spazi vuoti, manteniamo center e gestiamo la card all'interno. 
+           Il vero problema era l'overflow hidden. Lo rimuoviamo e lasciamo scrollare il body.
+        */
+        body {
+            align-items: center;  /* desktop center */
+        }
+
         @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Sfondo fisso a tutto schermo */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;  /* invece di absolute, così copre sempre l'intero viewport */
             inset: 0;
             background: url('images/background.jpg') center/cover no-repeat;
             opacity: 0.25;
@@ -33,11 +49,13 @@
             z-index: -1;
         }
 
+        /* Particelle */
         .particles {
-            position: absolute;
+            position: fixed;  /* fisso per non creare overflow */
             inset: 0;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;  /* le particelle che escono non causano scrollbar */
         }
         .particle {
             position: absolute;
@@ -53,12 +71,14 @@
             100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
+        /* Sfumatura fissa */
         body::after {
             content: "";
-            position: absolute;
+            position: fixed;
             inset: 0;
             background: radial-gradient(ellipse at 50% 50%, rgba(224,169,109,0.08) 0%, transparent 60%);
             z-index: -1;
+            pointer-events: none;
         }
 
         .card {
@@ -68,6 +88,7 @@
             padding: 4rem 3rem;
             max-width: 750px;
             width: 100%;
+            margin: auto;  /* centrata anche se il body è flex con align-items center */
             box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
             backdrop-filter: blur(20px);
             position: relative;
@@ -113,10 +134,14 @@
             margin-bottom: 2rem;
             position: relative;
             z-index: 1;
+            align-items: stretch; /* tutte le celle stessa altezza */
         }
         .mode-btn {
-            padding: 16px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 16px 10px;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -129,6 +154,8 @@
             transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s ease;
             position: relative;
             overflow: hidden;
+            word-break: break-word; /* evita overflow testo */
+            hyphens: auto;
         }
         .mode-btn.active {
             background: #F2EDE4;
@@ -391,17 +418,22 @@
         @media (max-width: 480px) {
             body {
                 padding: 12px;
+                /* Su mobile assicuriamo che il contenuto possa scrollare se necessario */
+                overflow-y: auto;
+                height: auto;
             }
             .card {
                 padding: 2rem 1.2rem;
                 border-radius: 20px;
+                margin: 0 auto;  /* centrata */
+                max-width: 100%;
             }
             .logo {
                 height: 90px;
             }
             .mode-btn {
                 font-size: 11px;
-                padding: 10px 6px;
+                padding: 12px 6px;
             }
             .big-number {
                 font-size: 2.5rem;

@@ -334,7 +334,7 @@
             margin: 2rem 0;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
             position: relative;
-            overflow: hidden;
+            overflow: visible;  /* Permette al tooltip di uscire */
         }
         .result-box::before {
             content: "";
@@ -347,6 +347,7 @@
             opacity: 0.05;
             border-radius: 50%;
             filter: blur(30px);
+            z-index: 0;
         }
         .result-header {
             display: flex;
@@ -365,35 +366,36 @@
             align-items: center;
             gap: 8px;
             position: relative;
+            z-index: 5;
         }
         .giornate-badge {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 18px;
+            padding: 10px 20px;
             background: rgba(224,169,109,0.1);
             border: 1px solid rgba(224,169,109,0.2);
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 14px;
             color: #E0A96D;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-weight: 500;
         }
         .giornate-badge svg {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
         }
         .info-icon-giornate {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.3);
             color: rgba(255,255,255,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: help;
             transition: all 0.2s;
@@ -406,8 +408,9 @@
         }
         .tooltip-giornate {
             position: absolute;
-            top: calc(100% + 10px);   /* verso il basso */
-            right: 0;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
             width: 280px;
             background: #1a1a1a;
             border: 1px solid rgba(224,169,109,0.3);
@@ -418,18 +421,18 @@
             z-index: 10;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(5px);
+            transform: translateX(-50%) translateY(5px);
             transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
             pointer-events: none;
             font-size: 13px;
             line-height: 1.5;
             color: rgba(242,237,228,0.85);
-            text-align: left;
+            text-align: center;
         }
         .tooltip-giornate.show {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
 
@@ -483,8 +486,8 @@
                 font-size: 12px;
             }
             .giornate-badge {
-                font-size: 10px;
-                padding: 4px 10px;
+                font-size: 12px;
+                padding: 8px 14px;
             }
             .esenzione-label span {
                 font-size: 14px;
@@ -532,7 +535,7 @@
             }
             .tooltip-giornate {
                 width: calc(100vw - 40px);
-                right: 0;
+                bottom: calc(100% + 8px);
                 font-size: 12px;
                 padding: 1rem 1.2rem;
             }

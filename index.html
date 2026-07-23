@@ -258,6 +258,40 @@
             color: #F2EDE4;
         }
 
+        /* Tooltip giornate corretto */
+        .tooltip-giornate {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 320px;
+            max-width: calc(100vw - 40px);
+            background: #1a1a1a;
+            border: 1px solid rgba(224,169,109,0.3);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(224,169,109,0.1) inset;
+            backdrop-filter: blur(16px);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(5px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            pointer-events: none;
+            font-size: 13px;
+            line-height: 1.5;
+            color: rgba(242,237,228,0.85);
+            text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .tooltip-giornate.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
         .switch {
             width: 54px;
             height: 30px;
@@ -334,7 +368,7 @@
             margin: 2rem 0;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
             position: relative;
-            overflow: visible;  /* Permette al tooltip di uscire */
+            overflow: visible;
         }
         .result-box::before {
             content: "";
@@ -387,15 +421,15 @@
             height: 14px;
         }
         .info-icon-giornate {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.3);
             color: rgba(255,255,255,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: help;
             transition: all 0.2s;
@@ -405,35 +439,6 @@
             border-color: #E0A96D;
             color: #E0A96D;
             background: rgba(224,169,109,0.1);
-        }
-        .tooltip-giornate {
-            position: absolute;
-            bottom: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 280px;
-            background: #1a1a1a;
-            border: 1px solid rgba(224,169,109,0.3);
-            border-radius: 16px;
-            padding: 1rem 1.2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(224,169,109,0.1) inset;
-            backdrop-filter: blur(16px);
-            z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(-50%) translateY(5px);
-            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-            pointer-events: none;
-            font-size: 13px;
-            line-height: 1.5;
-            color: rgba(242,237,228,0.85);
-            text-align: center;
-        }
-        .tooltip-giornate.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
         }
 
         .big-number {
@@ -522,22 +527,16 @@
             .result-header-label {
                 font-size: 10px;
             }
-            .tooltip {
-                width: calc(100vw - 40px);
+            .tooltip, .tooltip-giornate {
+                width: auto;
+                max-width: calc(100vw - 24px);
                 left: 0;
-                right: 0;
-                margin: 0 auto;
+                right: auto;
                 font-size: 12px;
                 padding: 1rem 1.2rem;
             }
             .tooltip h4 {
                 font-size: 13px;
-            }
-            .tooltip-giornate {
-                width: calc(100vw - 40px);
-                bottom: calc(100% + 8px);
-                font-size: 12px;
-                padding: 1rem 1.2rem;
             }
         }
     </style>

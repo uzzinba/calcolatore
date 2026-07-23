@@ -242,15 +242,6 @@
             color: #F2EDE4;
         }
 
-        @media (max-width: 480px) {
-            .tooltip {
-                width: calc(100vw - 60px);
-                left: 0;
-                right: 0;
-                margin: 0 auto;
-            }
-        }
-
         .switch {
             width: 54px;
             height: 30px;
@@ -396,13 +387,76 @@
             line-height: 1.6;
         }
 
+        /* ---- MOBILE ---- */
         @media (max-width: 480px) {
-            .card { padding: 2.5rem 1.5rem; }
-            .logo { height: 120px; }
-            .big-number { font-size: 2.8rem; }
-            .mode-btn { font-size: 12px; padding: 14px 6px; }
-            .note { font-size: 13px; }
-            .giornate-badge { font-size: 11px; padding: 6px 14px; }
+            body {
+                padding: 12px;
+            }
+            .card {
+                padding: 2rem 1.2rem;
+                border-radius: 20px;
+            }
+            .logo {
+                height: 90px;
+            }
+            .mode-btn {
+                font-size: 11px;
+                padding: 10px 6px;
+            }
+            .big-number {
+                font-size: 2.5rem;
+            }
+            .note {
+                font-size: 12px;
+            }
+            .giornate-badge {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+            .esenzione-label span {
+                font-size: 14px;
+            }
+            .switch {
+                width: 46px;
+                height: 26px;
+            }
+            .switch .knob {
+                width: 22px;
+                height: 22px;
+            }
+            .switch.active .knob {
+                transform: translateX(20px);
+            }
+            .input-label {
+                font-size: 10px;
+                margin-bottom: 4px;
+            }
+            input {
+                padding: 16px 18px 16px 44px;
+                font-size: 1.3rem;
+            }
+            .currency-symbol {
+                left: 18px;
+                font-size: 1.3rem;
+            }
+            .result-box {
+                padding: 1.5rem;
+                margin: 1.2rem 0;
+            }
+            .result-header-label {
+                font-size: 10px;
+            }
+            .tooltip {
+                width: calc(100vw - 40px);
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                font-size: 12px;
+                padding: 1rem 1.2rem;
+            }
+            .tooltip h4 {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
